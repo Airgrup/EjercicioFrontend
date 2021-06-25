@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-export const CountdownHours = () =>
+export const CountdownHours = (props: { date: Date }) =>
 {
-    const [hours, setHours] = useState(() => calculateHoursLeft());
+    const [hours, setHours] = useState(() => calculateHoursLeft(props.date));
 
 
     useEffect(() =>
     {
         const timer = setTimeout(() =>
         {
-            setHours(calculateHoursLeft());
+            setHours(calculateHoursLeft(props.date));
         }, 1000);
 
         return () => clearTimeout(timer);
@@ -18,12 +18,9 @@ export const CountdownHours = () =>
     return <>{ Math.floor(hours) }</>
 }
 
-const calculateHoursLeft = () => {
-    const date = new Date();
-    date.setDate(date.getDate() + 1);
-    const dateString = date.toDateString();
-    const difference = + new Date(`${dateString} 00:00:00:0`) - +new Date();
-    const result = (difference / (1000 * 60 * 60)) % 24;
-    console.log(`${result} hours left`); 
-    return result;
+let fakeCounter = 0;
+
+const calculateHoursLeft = (date: Date) => 
+{
+    return fakeCounter++;
 }

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-export const CountdownMinutes = () =>
+export const CountdownMinutes = (props: { date: Date }) =>
 {
-    const [minutes, setMinutes] = useState(() => calculateMinutesLeft());
+    const [minutes, setMinutes] = useState(() => calculateMinutesLeft(props.date));
 
     useEffect(() =>
     {
         const timer = setTimeout(() =>
         {
-            setMinutes(calculateMinutesLeft());
+            setMinutes(calculateMinutesLeft(props.date));
         }, 1000);
 
         return () => clearTimeout(timer);
@@ -17,12 +17,9 @@ export const CountdownMinutes = () =>
     return <>{ Math.floor(minutes) }</>
 }
 
-const calculateMinutesLeft = () => {
-    const date = new Date();
-    date.setDate(date.getDate() + 1);
-    const dateString = date.toDateString();
-    const difference = + new Date(`${dateString} 00:00:00:0`) - +new Date();
-    const result = (difference / 1000 / 60) % 60;
-    console.log(`${result} minutes left`); 
-    return result;
+let fakeCounter = 0;
+
+const calculateMinutesLeft = (date: Date) => {
+   
+    return fakeCounter++;
 }
