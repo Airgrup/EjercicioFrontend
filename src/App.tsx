@@ -16,14 +16,14 @@ function App()
     {
         if (event.target.value)
         {
-            try 
+            const newDate = new Date(event.target.value)
+            if (!isNaN(newDate.getTime()))
             {
-                const newDate = new Date(event.target.value)
                 setDate(newDate)
             }
-            catch(e)
+            else
             {
-                // invalid date
+                    // invalid date
             }
         }
     };
@@ -31,7 +31,7 @@ function App()
     return (
         <div className="App">
             <div>
-                Quedan <CountdownHours date={date} /> horas, <CountdownMinutes date={date} /> minutos para las <input type="datetime-local" onChange={onChange} value={toLocalDateTime(date)}></input>
+                Quedan <CountdownHours date={date} /> horas, <CountdownMinutes date={date} /> minutos para las <input type="datetime-local" onChange={onChange} defaultValue={toLocalDateTime(date)}></input>
             </div>
         </div>
     );

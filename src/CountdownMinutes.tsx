@@ -6,20 +6,21 @@ export const CountdownMinutes = (props: { date: Date }) =>
 
     useEffect(() =>
     {
-        const timer = setTimeout(() =>
+        const timer = setInterval(() =>
         {
             setMinutes(calculateMinutesLeft(props.date));
         }, 1000);
 
-        return () => clearTimeout(timer);
-    });
+        return () => clearInterval(timer);
+    }, [props.date]);
 
     return <>{ Math.floor(minutes) }</>
 }
 
 let fakeCounter = 0;
 
-const calculateMinutesLeft = (date: Date) => {
-   
+const calculateMinutesLeft = (date: Date) => 
+{
+    console.log(date);
     return fakeCounter++;
 }
